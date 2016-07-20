@@ -1,7 +1,7 @@
 {
   "name": "fg-toss",
   "description": "A JavaScript function that scrolls any overflow container to a set of coordinates using an animated duration.",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "homepage": "https://github.com/filamentgroup/toss/",
   "author": {
     "name": "Filament Group",
