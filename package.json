@@ -1,0 +1,30 @@
+{
+  "name": "fg-toss",
+  "description": "A JavaScript function that scrolls any overflow container to a set of coordinates using an animated duration.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/filamentgroup/toss/",
+  "author": {
+    "name": "Filament Group",
+    "email": "thegroup@filamentgroup.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/filamentgroup/toss.git"
+  },
+  "bugs": {
+    "url": "https://github.com/filamentgroup/toss/issues/"
+  },
+  "main": "src/toss.js",
+  "devDependencies": {
+    "grunt-contrib-jshint": "^0.11.3",
+    "grunt-contrib-qunit": "^0.7.0",
+    "grunt-cli": "~0.1.13",
+    "matchdep": "^1.0.0",
+    "grunt": "~0.4.5"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.5",
+    "grunt-cli": "~0.1.11"
+  },
+  "preview_url": "http://master.origin.toss.fgview.com/demo/"
+}

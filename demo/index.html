@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Toss Example</title>
+	<link rel="stylesheet" href="https://filamentgroup.github.io/demo-head/demohead.css">
+	<link rel="stylesheet" href="docs.css">
+	<link rel="stylesheet" href="../lib/xrayhtml.css">
+
+	<script src="../lib/shoestring-dev.js"></script>
+	<script src="../lib/xrayhtml.js"></script>
+	<script src="../src/toss.js"></script>
+	<script src="https://filamentgroup.github.io/demo-head/loadfont.js"></script>
+</head>
+<body class="docs">
+	<div class="demo-header">
+		<div class="company">
+			<img src="http://filamentgroup.com/images/fg-logo-positive-sm-crop.png">
+		</div>
+		<div class="details">
+			<h1 class="description-container">Demo of <span class="repo-name">Toss</span>
+				<span class="description">An animated scroll function.</span>
+			</h1>
+			<ul class="outbound-links">
+				<li><a href="https://github.com/filamentgroup/toss">Code</a></li>
+				<li><a href="https://github.com/filamentgroup/toss/issues">Issues</a></li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="docs-main">
+
+
+
+    <h1 class="docs">Toss Docs</h1>
+    <p class="docs">Toss is a JavaScript function that scrolls any overflow container to a set of coordinates using an animated duration.
+      It will work on any element with overflow set to <code>hidden</code>, <code>scroll,</code>, or <code>auto</code>.
+      Since overflow scrolling does not work in every browser, we highly recommend only using overflow on content that is accessible through additional means, such as with anchor links that point to each "slide" in a horizontal-overflow container.</p>
+    <p class="docs">It has no dependencies. Just call <code>toss.toss()</code>, and pass a reference to an element and a set of options.
+      For example, this script finds an element with an ID of "demo", and scrolls it to top: 300, left: 300 over the course of 5 seconds:</p>
+
+<pre class="docs"><code class="docs">
+var demoElement = document.getElementById( "demo" );
+toss.toss( demoElement, { left: 300, top: 300, duration: 5000 } );
+</code></pre>
+
+<h2 class="docs">API & Options</h2>
+<p class="docs">In addition to left, top, and duration, there are other options. Here they are with their defaults and acceptable values:</p>
+
+<ul class="docs">
+  <li class="docs"><strong>Left</strong> Accepts any positive number, or a string representing a positive or negative shift (such as <code>"+35"</code>). Default: Element's current scrollLeft</li>
+  <li class="docs"><strong>Top</strong>  Accepts any positive number, or a string representing a positive or negative shift (such as <code>"+35"</code>). Default: Element's current scrollTop</li>
+  <li class="docs"><strong>Duration</strong> Time in ms that the animation should take to complete. Default: <code>200</code></li>
+  <li class="docs"><strong>Easing</strong> The function used to ease the animation speed over time. Easing can use any of <a href="http://www.robertpenner.com/easing_terms_of_use.html">Robert Penner's equations</a>.
+    By default, toss uses an ease-out-cubic equation. If providing a function, these arguments are expected: t = current iteration, b = initial value, c = end value, d = total iterations
+   Use toss.easing to provide a different default for all toss animations, or pass an easing function as a callback to the toss method.</li>
+  <li class="docs"><strong>Finished</strong> A callback that will execute when the animation is complete. Default: <code>function(){}</code></li>
+
+</ul>
+
+<h3 class="docs">Methods & properties</h3>
+<p class="docs">The <code>toss</code> object exposes three properties:</p>
+
+<ul class="docs">
+  <li class="docs"><strong>toss.toss</strong> The method for scrolling an a container.</li>
+  <li class="docs"><strong>toss.tossing</strong> A method to either check if an element is currently being tossed, or cancel a toss that is currently underway. To check if an element is being tossed, pass a reference to the element: <code>toss.tossing( myElement )</code> and it will return true if it's currently being tossed. A cancelled toss will still fire its <code>finished</code> callback immediately upon cancelation. To cancel a toss, add a <code>false</code> second argument to that call. Note: calling <code>toss.toss()</code> will also cancel a toss in play before starting a new one.</li>
+  <li class="docs"><strong>toss.easing</strong> A property for setting the global easing function for all toss animations. Default is an ease-out-cubic equation.</li>
+</ul>
+
+  <h2 class="docs">Example</h2>
+
+  <p>In the following example, there's some content in an overflow container with dimensions that allow its child content to scroll in both directions.
+    When clicked, the link above the scrolling container will call the toss example code shown above, scrolling the example element.</p>
+
+    <div data-xrayhtml>
+      <style>
+        .tossdemo {
+          height: 500px;
+          margin: 0 auto;
+          overflow: auto;
+        }
+        .tossdemo-inner {
+          width: 200%;
+          height: 200%;
+        }
+      </style>
+
+      <script>
+      window.onload = function(){
+        var demoLink = document.getElementById( "scrollto" );
+        var demoElement = document.getElementById( "demo" );
+        demoLink.onclick = function( e ){
+          e.preventDefault();
+          toss.toss( demoElement, { left: 300, top: 300, duration: 5000 } );
+        };
+      };
+      </script>
+
+      <p><a href="#" id="scrollto">Scroll to 300, 300</a></p>
+
+    <div id="demo" class="tossdemo">
+
+      <div class="tossdemo-inner">
+
+  		<h1>This is an example overflow container</h1>
+
+  		<p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
+
+  		<h2>Header Level 2</h2>
+
+  		<ol>
+  		   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+  		   <li>Aliquam tincidunt mauris eu risus.</li>
+  		</ol>
+
+  		<blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p></blockquote>
+
+  		<h3>Header Level 3</h3>
+
+  		<ul>
+  		   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
+  		   <li>Aliquam tincidunt mauris eu risus.</li>
+  		</ul>
+
+  		<pre><code>
+  		#header h1 a {
+  			display: block;
+  			width: 300px;
+  			height: 80px;
+  		}
+  		</code></pre>
+
+      </div>
+
+  	</div>
+    </div>
+
+
+</div>
+
+
+
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+# compress transfer
+<IfModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/css text/javascript application/javascript
+</IfModule>
+
+# enabled SSI for .html files
+AddType text/html .html
+AddHandler server-parsed .html
+Options Indexes Includes FollowSymlinks
+RedirectMatch 301 ^/$ /docs
+
+# set charset early for parsing
+AddCharset UTF-8 .html
+
+# Video
+AddType video/ogg .ogv
+AddType video/mp4 .mp4
+AddType video/webm .webm
+
+<IfModule mod_expires.c>
+# Turn on Expires and set default to 0, expires immediately.
+ExpiresActive On
+ExpiresDefault A0
+
+# Set up caching on media files for 1 day (later, we should set this up to provide more appropriate caching)
+<FilesMatch "\.(js|css|png|jpg|gif|ico|woff|woff2|ttf)$">
+Header set Cache-Control "max-age=86400"
+</FilesMatch>
+
+</IfModule>
