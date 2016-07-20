@@ -14,98 +14,114 @@ window.onload = function(){
 			ok( toss );
 		});
 
-		test( 'API Properties: toss is an object', function() {
-			ok( typeof( toss ) === "object" );
+		test( 'API Properties: toss is a function', function() {
+			ok( typeof( toss ) === "function" );
 		});
 
-		test( 'API Properties: toss.toss is defined', function() {
+		test( 'API Properties: toss.tossing is defined', function() {
+			ok( toss.tossing );
+		});
+
+		test( 'API Properties: toss.tossing is a function', function() {
+			ok( typeof( toss.tossing ) === "function" );
+		});
+
+		test( 'API Properties: toss.easing is defined', function() {
+			ok( toss.tossing );
+		});
+
+		test( 'API Properties: toss.easing is a function', function() {
+			ok( typeof( toss.tossing ) === "function" );
+		});
+
+		test( 'API Properties: toss.toss is defined, for retaining prior api', function() {
 			ok( toss.toss );
 		});
 
-		test( 'API Properties: toss.toss is a function', function() {
-			ok( typeof( toss.toss ) === "function" );
+		test( 'API Properties: toss is a function', function() {
+			ok( typeof( toss ) === "function" );
 		});
 
 
-		test( 'toss.toss method returns object of values', function(){
-			var to = toss.toss(testElem);
+		test( 'toss method returns object of values', function(){
+			var to = toss(testElem);
 			ok( typeof to === "object", "Object returned from toss method" );
 		});
 
-		test( 'toss.toss methods return includes top value', function(){
-			var to = toss.toss(testElem);
+		test( 'toss methods return includes top value', function(){
+			var to = toss(testElem);
 			ok( to.top !== undefined, "Top is defined" );
 		});
 
-		test( 'toss.toss methods return top value is a number', function(){
-			var to = toss.toss(testElem);
+		test( 'toss methods return top value is a number', function(){
+			var to = toss(testElem);
 			ok( typeof to.top === "number", "Top is a number" );
 		});
 
-		test( 'toss.toss methods return includes left value', function(){
-			var to = toss.toss(testElem);
+		test( 'toss methods return includes left value', function(){
+			var to = toss(testElem);
 			ok( to.left !== undefined, "Left is defined" );
 		});
 
-		test( 'toss.toss methods return left value is a number', function(){
-			var to = toss.toss(testElem);
+		test( 'toss methods return left value is a number', function(){
+			var to = toss(testElem);
 			ok( typeof to.left === "number", "Left is a number" );
 		});
 
 
-		test( "toss.toss returns overridden top absolute value", function(){
-			var to = toss.toss( testElem, { top: 500 } );
+		test( "toss returns overridden top absolute value", function(){
+			var to = toss( testElem, { top: 500 } );
 			ok(  to.top === 500, "Top equals 500" );
 		});
 
-		test( "toss.toss returns expected overridden top relative value", function(){
+		test( "toss returns expected overridden top relative value", function(){
 			testElem.scrollTop = 10;
 			var newtop = "+10",
 				expected = testElem.scrollTop + 10;
 
-			var to = toss.toss( testElem, { top: newtop } );
+			var to = toss( testElem, { top: newtop } );
 			ok(  to.top === expected, "Top returns expected value" );
 		});
 
-		test( "toss.toss returns expected overridden left relative value", function(){
+		test( "toss returns expected overridden left relative value", function(){
 			testElem.scrollLeft = 10;
 			var newleft = "+10",
 				expected = testElem.scrollLeft + 10;
 
-			var to = toss.toss( testElem, { left: newleft } );
+			var to = toss( testElem, { left: newleft } );
 			ok(  to.left === expected, "Left returns expected value" );
 		});
 
-		test( "toss.toss returns expected overridden top negative relative value", function(){
+		test( "toss returns expected overridden top negative relative value", function(){
 			testElem.scrollTop = 10;
 			var newtop = "-10",
 				expected = testElem.scrollTop - 10;
 
-			var to = toss.toss( testElem, { top: newtop } );
+			var to = toss( testElem, { top: newtop } );
 			ok(  to.top === expected, "Top returns expected value" );
 		});
 
-		test( "toss.toss returns expected overridden left negative relative value", function(){
+		test( "toss returns expected overridden left negative relative value", function(){
 			testElem.scrollLeft = 10;
 			var newleft = "-10",
 				expected = testElem.scrollLeft - 10;
 
-			var to = toss.toss( testElem, { left: newleft } );
+			var to = toss( testElem, { left: newleft } );
 			ok(  to.left === expected, "Left returns expected value" );
 		});
 
 
 
 
-		test( "toss.toss returns overridden left absolute value", function(){
-			var to = toss.toss( testElem, { left: 200 } );
+		test( "toss returns overridden left absolute value", function(){
+			var to = toss( testElem, { left: 200 } );
 			ok(  to.left === 200, "Left equals 200" );
 		});
 
-		asyncTest( "toss.toss returns callback after completed", function(){
+		asyncTest( "toss returns callback after completed", function(){
 			newTestElem.scrollLeft = 0;
 			expect(1);
-			toss.toss( newTestElem, { left: 100, finished: function(){
+			toss( newTestElem, { left: 100, finished: function(){
 				ok( "Toss is complete" );
 				start();
 			} } );

@@ -1,15 +1,6 @@
 /*! Toss. An animated scroll function. (c) 2016: Scott Jehl, Filament Group, Inc. http://filamentgroup.github.com/toss/LICENSE */
 (function( w, undefined ){
 
-	var o = w.toss = {};
-
-	// Easing can use any of Robert Penner's equations (http://www.robertpenner.com/easing_terms_of_use.html). By default, toss includes ease-out-cubic
-	// arguments: t = current iteration, b = initial value, c = end value, d = total iterations
-	// use w.toss.easing to provide a custom function externally, or pass an easing function as a callback to the toss method
-	o.easing = function (t, b, c, d) {
-		return c*((t=t/d-1)*t*t + 1) + b;
-	};
-
 	// requestAnimationFrame pfill
 	var raf = (function(){
 		return  window.requestAnimationFrame       ||
@@ -20,17 +11,8 @@
 			};
 	})();
 
-	// tossing object keeps track of currently tossing elements. true during a programatic scroll
-	var tossingElems = {};
-	o.tossing = function( elem, state ){
-		if( state !== undefined ){
-			tossingElems[ elem ] = state;
-		}
-		return tossingElems[ elem ];
-	};
 
-	// Keeper of intervals
-	var timeKeeper;
+
 
 	/* toss scrolls and element with easing
 
@@ -42,8 +24,8 @@
 		* easing is an optional custom easing function. Default is w.toss.easing. Must follow the easing function signature
 
 	*/
-	o.toss = function( elem, options ){
-		o.tossing( elem, false );
+	w.toss = function( elem, options ){
+		toss.tossing( elem, false );
 		var i = 0,
 			sLeft = elem.scrollLeft,
 			sTop = elem.scrollTop,
@@ -52,7 +34,7 @@
 				top: "+0",
 				left: "+0",
 				duration: 200,
-				easing: o.easing,
+				easing: toss.easing,
 				finished: function() {}
 			},
 			endLeft, endTop;
@@ -87,13 +69,13 @@
 			op.top = op.top - sTop;
 		}
 
-		o.tossing( elem, true );
+		toss.tossing( elem, true );
 		var startTime = new Date().getTime();
 		var endTime = startTime + op.duration;
 		var run = function(){
 			var curTime = new Date().getTime();
 			// if tossing is suddenly not true, return the callback
-			if( !o.tossing( elem ) ){
+			if( !toss.tossing( elem ) ){
 				if( op.finished ){
 					op.finished();
 				}
@@ -112,14 +94,33 @@
 				if( op.finished ){
 					op.finished();
 				}
-				o.tossing( elem, false );
+				toss.tossing( elem, false );
 			}
 		};
 
 		raf( run );
 
 		// Return the values, post-mixin, with end values specified
-		return { top: endTop, left: endLeft, duration: o.duration, easing: o.easing };
+		return { top: endTop, left: endLeft, duration: op.duration, easing: op.easing };
 	};
+
+  // tossing object keeps track of currently tossing elements. true during a programatic scroll
+  var tossingElems = {};
+  toss.tossing = function( elem, state ){
+    if( state !== undefined ){
+      tossingElems[ elem ] = state;
+    }
+    return tossingElems[ elem ];
+  };
+
+  // Easing can use any of Robert Penner's equations (http://www.robertpenner.com/easing_terms_of_use.html). By default, toss includes ease-out-cubic
+  // arguments: t = current iteration, b = initial value, c = end value, d = total iterations
+  // use w.toss.easing to provide a custom function externally, or pass an easing function as a callback to the toss method
+  toss.easing = function (t, b, c, d) {
+    return c*((t=t/d-1)*t*t + 1) + b;
+  };
+
+  //retain old api
+  toss.toss = toss;
 
 })( this );

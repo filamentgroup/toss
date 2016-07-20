@@ -37,12 +37,12 @@
     <p class="docs">Toss is a JavaScript function that scrolls any overflow container to a set of coordinates using an animated duration.
       It will work on any element with overflow set to <code>hidden</code>, <code>scroll,</code>, or <code>auto</code>.
       Since overflow scrolling does not work in every browser, we highly recommend only using overflow on content that is accessible through additional means, such as with anchor links that point to each "slide" in a horizontal-overflow container.</p>
-    <p class="docs">It has no dependencies. Just call <code>toss.toss()</code>, and pass a reference to an element and a set of options.
+    <p class="docs">It has no dependencies. Just call <code>toss()</code>, and pass a reference to an element and a set of options.
       For example, this script finds an element with an ID of "demo", and scrolls it to top: 300, left: 300 over the course of 5 seconds:</p>
 
 <pre class="docs"><code class="docs">
 var demoElement = document.getElementById( "demo" );
-toss.toss( demoElement, { left: 300, top: 300, duration: 5000 } );
+toss( demoElement, { left: 300, top: 300, duration: 5000 } );
 </code></pre>
 
 <h2 class="docs">API & Options</h2>
@@ -63,8 +63,7 @@ toss.toss( demoElement, { left: 300, top: 300, duration: 5000 } );
 <p class="docs">The <code>toss</code> object exposes three properties:</p>
 
 <ul class="docs">
-  <li class="docs"><strong>toss.toss</strong> The method for scrolling an a container.</li>
-  <li class="docs"><strong>toss.tossing</strong> A method to either check if an element is currently being tossed, or cancel a toss that is currently underway. To check if an element is being tossed, pass a reference to the element: <code>toss.tossing( myElement )</code> and it will return true if it's currently being tossed. A cancelled toss will still fire its <code>finished</code> callback immediately upon cancelation. To cancel a toss, add a <code>false</code> second argument to that call. Note: calling <code>toss.toss()</code> will also cancel a toss in play before starting a new one.</li>
+  <li class="docs"><strong>toss.tossing</strong> A method to either check if an element is currently being tossed, or cancel a toss that is currently underway. To check if an element is being tossed, pass a reference to the element: <code>toss.tossing( myElement )</code> and it will return true if it's currently being tossed. A cancelled toss will still fire its <code>finished</code> callback immediately upon cancelation. To cancel a toss, add a <code>false</code> second argument to that call. Note: calling <code>toss()</code> will also cancel a toss in play before starting a new one.</li>
   <li class="docs"><strong>toss.easing</strong> A property for setting the global easing function for all toss animations. Default is an ease-out-cubic equation.</li>
 </ul>
 
@@ -92,7 +91,7 @@ toss.toss( demoElement, { left: 300, top: 300, duration: 5000 } );
         var demoElement = document.getElementById( "demo" );
         demoLink.onclick = function( e ){
           e.preventDefault();
-          toss.toss( demoElement, { left: 300, top: 300, duration: 5000 } );
+          toss( demoElement, { left: 300, top: 300, duration: 5000 } );
         };
       };
       </script>
