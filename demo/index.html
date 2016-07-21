@@ -69,8 +69,9 @@ toss( demoElement, { left: 300, top: 300, duration: 5000 } );
 
   <h2 class="docs">Example</h2>
 
-  <p>In the following example, there's some content in an overflow container with dimensions that allow its child content to scroll in both directions.
-    When clicked, the link above the scrolling container will call the toss example code shown above, scrolling the example element.</p>
+  <p>In the following example, there's a list of numbers in an overflow container that is styled with dimensions that allow its child content to scroll in both directions.
+    The list items are styled to fill the container's width and height 100%, so only one shows at a time.
+    The links above the scrolling container are linked to each respective slide, but some JavaScript is bound to them to use the toss function to scroll to the list item smoothly.</p>
 
     <div data-xrayhtml>
       <style>
@@ -81,56 +82,58 @@ toss( demoElement, { left: 300, top: 300, duration: 5000 } );
         }
         .tossdemo-inner {
           width: 200%;
-          height: 200%;
+          padding: 0;
+          margin: 0;
+          list-style: none;
+        }
+        .tossdemo-inner li {
+          width: 50%;
+          height: 500px;
+          line-height: 500px;
+          font-size: 5em;
+          font-weight: bold;
+          background: #eee;
+          color: #fff;
+          text-align: center;
+          float: left;
         }
       </style>
 
       <script>
       window.onload = function(){
-        var demoLink = document.getElementById( "scrollto" );
+        var demoLinks = document.getElementById( "tossdemo-jumplinks" );
         var demoElement = document.getElementById( "demo" );
-        demoLink.onclick = function( e ){
+        demoLinks.onclick = function( e ){
           e.preventDefault();
-          toss( demoElement, { left: 300, top: 300, duration: 5000 } );
+          var targetSlide = document.getElementById( e.target.href.split( "#" )[ 1 ] );
+          toss( demoElement, {
+            left: targetSlide.offsetLeft - demoElement.offsetLeft,
+						top: targetSlide.offsetTop - demoElement.offsetTop,
+            duration: 500
+          } );
         };
       };
       </script>
 
-      <p><a href="#" id="scrollto">Scroll to 300, 300</a></p>
+      <ol id="tossdemo-jumplinks">
+        <li><a href="#1">Scroll to #1</a></li>
+  		  <li><a href="#2">Scroll to #2</a></li>
+        <li><a href="#3">Scroll to #3</a></li>
+        <li><a href="#4">Scroll to #4</a></li>
+        <li><a href="#5">Scroll to #5</a></li>
+        <li><a href="#6">Scroll to #6</a></li>
+      </ol>
 
     <div id="demo" class="tossdemo">
 
-      <div class="tossdemo-inner">
-
-  		<h1>This is an example overflow container</h1>
-
-  		<p><strong>Pellentesque habitant morbi tristique</strong> senectus et netus et malesuada fames ac turpis egestas. Vestibulum tortor quam, feugiat vitae, ultricies eget, tempor sit amet, ante. Donec eu libero sit amet quam egestas semper. <em>Aenean ultricies mi vitae est.</em> Mauris placerat eleifend leo. Quisque sit amet est et sapien ullamcorper pharetra. Vestibulum erat wisi, condimentum sed, <code>commodo vitae</code>, ornare sit amet, wisi. Aenean fermentum, elit eget tincidunt condimentum, eros ipsum rutrum orci, sagittis tempus lacus enim ac dui. <a href="#">Donec non enim</a> in turpis pulvinar facilisis. Ut felis.</p>
-
-  		<h2>Header Level 2</h2>
-
-  		<ol>
-  		   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-  		   <li>Aliquam tincidunt mauris eu risus.</li>
-  		</ol>
-
-  		<blockquote><p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus magna. Cras in mi at felis aliquet congue. Ut a est eget ligula molestie gravida. Curabitur massa. Donec eleifend, libero at sagittis mollis, tellus est malesuada tellus, at luctus turpis elit sit amet quam. Vivamus pretium ornare est.</p></blockquote>
-
-  		<h3>Header Level 3</h3>
-
-  		<ul>
-  		   <li>Lorem ipsum dolor sit amet, consectetuer adipiscing elit.</li>
-  		   <li>Aliquam tincidunt mauris eu risus.</li>
-  		</ul>
-
-  		<pre><code>
-  		#header h1 a {
-  			display: block;
-  			width: 300px;
-  			height: 80px;
-  		}
-  		</code></pre>
-
-      </div>
+      <ol class="tossdemo-inner">
+        <li id="1" style="background: blue">1</li>
+  		  <li id="2" style="background: red">2</li>
+        <li id="3" style="background: green">3</li>
+        <li id="4" style="background: purple">4</li>
+        <li id="5" style="background: orange">5</li>
+        <li id="6" style="background: pink">6</li>
+      </ol>
 
   	</div>
     </div>
