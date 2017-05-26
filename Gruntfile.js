@@ -1,6 +1,14 @@
 /*global module:false*/
 module.exports = function(grunt) {
 
+	var os = require( 'os' ),
+	path = require( 'path' ),
+	isWindows = os.platform().toLowerCase().indexOf( 'win' ) === 0; // watch out for 'darwin'
+
+	require( 'matchdep' ).filterDev( 'grunt-*' ).forEach( grunt.loadNpmTasks );
+
+
+
 	// Project configuration.
 	grunt.initConfig({
 		pkg: '<json:package.json>',
@@ -13,30 +21,12 @@ module.exports = function(grunt) {
 		},
 		qunit: {
 			files: ['test/index.html']
-		},
-		lint: {
-			files: ['grunt.js', 'src/**/*.js', 'test/**/*.js']
-		},
-		jshint: {
-			options: {
-				curly: true,
-				eqeqeq: true,
-				immed: true,
-				latedef: true,
-				newcap: true,
-				noarg: true,
-				sub: true,
-				undef: true,
-				boss: true,
-				eqnull: true,
-				browser: true
-			}
 		}
 	});
 
 	// Default task.
-	grunt.registerTask('default', 'lint qunit');
+	//grunt.registerTask('default', ['qunit']);
 	// Travis
-	grunt.registerTask('travis', 'lint qunit');
+	//grunt.registerTask('travis', [ 'qunit']);
 
 };
