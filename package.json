@@ -22,9 +22,5 @@
     "matchdep": "^1.0.0",
     "grunt": "~0.4.5"
   },
-  "peerDependencies": {
-    "grunt": "~0.4.5",
-    "grunt-cli": "~1.2.0"
-  },
   "preview_url": "http://master.origin.toss.fgview.com/demo/"
 }
