@@ -25,8 +25,8 @@ module.exports = function(grunt) {
 	});
 
 	// Default task.
-	//grunt.registerTask('default', ['qunit']);
+	grunt.registerTask('default', []);
 	// Travis
-	//grunt.registerTask('travis', [ 'qunit']);
+	grunt.registerTask('travis', []);
 
 };
