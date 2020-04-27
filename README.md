@@ -6,7 +6,7 @@ A JavaScript function that scrolls any overflow container to a set of coordinate
 - License: MIT http://filamentgroup.github.com/toss/LICENSE
 
 Demos & Docs:
-http://master.origin.toss.fgview.com/demo/
+https://filamentgroup.github.io/toss/demo/
 
 On NPM:
 https://www.npmjs.com/package/fg-toss

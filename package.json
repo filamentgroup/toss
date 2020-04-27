@@ -22,5 +22,5 @@
     "matchdep": "^1.0.0",
     "grunt": "~0.4.5"
   },
-  "preview_url": "http://master.origin.toss.fgview.com/demo/"
+  "preview_url": "https://filamentgroup.github.io/toss/demo/"
 }
