@@ -1,3 +1,5 @@
+:warning: This project is archived and the repository is no longer maintained. 
+
 # Toss!
 
 A JavaScript function that scrolls any overflow container to a set of coordinates using an animated duration.
